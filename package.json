@@ -1,0 +1,21 @@
+{
+  "name": "finance-api",
+  "version": "1.0.0",
+  "description": "api service for finance infromation",
+  "main": "./src/main.js",
+  "scripts": {
+    "test": "",
+    "start": "node ./src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gordon-hj/finance-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "api",
+    "web"
+  ],
+  "author": "gordon.hj",
+  "license": "ISC"
+}
