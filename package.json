@@ -17,5 +17,9 @@
     "web"
   ],
   "author": "gordon.hj",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql": "^2.18.1"
+  }
 }
