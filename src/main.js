@@ -7,15 +7,6 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    console.log('Requests: %s', req.headers);
-    console.log('Request IP: %s',  req.headers['x-forwarded-for'] ||  req.socket.remoteAddress);
-
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Under construction, Contact gordon_hj@naver.com, https://github.com/gordon-hj');
-});
-
 app.get("/api/finance/credit_union/regions", (req, res) => 
     context.credit_union_service.getAllRegions()
     .then((regions) => {
@@ -58,5 +49,21 @@ app.get("/api/finance/credit_union/products", (req, res) => {
         res.json(products);        
     })}
 );
+
+app.get("*", (req, res) => {
+    const path = req.path
+    console.log(path)
+    res.statusCode = 200;
+    res.sendFile(path, {root: './static/public'});
+});
+
+app.get("/", (req, res) => {
+    console.log('Requests: %s', req.headers);
+    console.log('Request IP: %s',  req.headers['x-forwarded-for'] ||  req.socket.remoteAddress);
+
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Under construction, Contact gordon_hj@naver.com, https://github.com/gordon-hj');
+});
 
 app.listen(80, () => console.log('Server running on port 80'));
