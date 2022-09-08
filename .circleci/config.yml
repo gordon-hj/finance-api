@@ -16,7 +16,7 @@ jobs:
           name: install dependencies
           command: |
              aws lightsail download-default-key-pair > t.pem
-             ssh -i t.pem ubuntu@3.36.220.121
+             ssh -i ./t.pem ubuntu@3.36.220.121
              docker ps
              exit
 #            aws lightsail get-instances
