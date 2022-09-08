@@ -13,13 +13,9 @@ jobs:
     docker:
       # replace with your preferred image
       - image: cimg/base:stable
-    working_directory: ~/circlecitest
+    working_directory: ~/test
     steps:
-      - aws-cli/setup:
-          configure-default-region: true
-          configure-profile-region: true
-          disable-aws-pager: true
-          override-installed: false
+      - aws-cli/install
       - checkout
       - run:
           name: install dependencies
