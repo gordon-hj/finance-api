@@ -15,7 +15,6 @@ jobs:
       - image: cimg/base:stable
     working_directory: ~/circlecitest
     steps:
-      - aws-cli/install
       - aws-cli/setup:
           configure-default-region: true
           configure-profile-region: true
@@ -25,9 +24,9 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            sudo apt-get install npm
-            npm install
-            docker ps
+            aws get-instance
+#            sudo apt-get install npm
+#            npm install
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
