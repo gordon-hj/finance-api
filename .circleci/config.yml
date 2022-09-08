@@ -16,7 +16,9 @@ jobs:
           name: install dependencies
           command: |
              aws lightsail download-default-key-pair > t.pem
-             ls
+             ssh -i t.pem ubuntu@3.36.220.121
+             docker ps
+             exit
 #            aws lightsail get-instances
 #            sudo apt-get install npm
 #            npm install
