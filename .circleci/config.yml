@@ -24,7 +24,9 @@ jobs:
       - checkout
       - run:
           name: install dependencies
-          command: npm install
+          command: |
+            sudo apt-get install npm
+            npm install
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
