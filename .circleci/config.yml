@@ -15,7 +15,6 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            aws configure
             aws lightsail get-instances
 #            sudo apt-get install npm
 #            npm install
