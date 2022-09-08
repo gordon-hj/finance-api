@@ -15,7 +15,11 @@ jobs:
       - image: cimg/base:stable
     working_directory: ~/test
     steps:
-      - aws-cli/install
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY 
+          aws-region: AWS_DEFAULT_REGION 
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY 
+          profile-name: circleci 
       - checkout
       - run:
           name: install dependencies
@@ -30,13 +34,13 @@ workflows:
   example-workflow:
     jobs:
       - example-job
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
-    jobs:
-      - node/test:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+  # sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+  #   # Inside the workflow, you define the jobs you want to run.
+  #   jobs:
+  #     - node/test:
+  #         # This is the node version to use for the `cimg/node` tag
+  #         # Relevant tags can be found on the CircleCI Developer Hub
+  #         # https://circleci.com/developer/images/image/cimg/node
+  #         version: '16.10'
+  #         # If you are using yarn, change the line below from "npm" to "yarn"
+  #         pkg-manager: npm
