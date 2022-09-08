@@ -6,6 +6,7 @@ orbs:
 
 jobs:
   example-job:
+    executor: aws-cli/default
     working_directory: ~/test
     steps:
       - checkout
