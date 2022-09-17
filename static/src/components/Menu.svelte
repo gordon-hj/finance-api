@@ -1,5 +1,5 @@
 <script>
-	let menu = ['신협 금리 조회'];
+	let menu = ['신협 예적금 금리', '새마을금고 예적금 금리'];
 </script>
 
 <div class="list-group list-group-flush">

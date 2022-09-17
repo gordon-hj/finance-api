@@ -1,45 +1,33 @@
 <script>
-    import SvelteTable from "../../node_modules/svelte-table";
-import CreditUnionLocal from "./CreditUnionLocal.svelte";
+    import CreditUnionLocal from "./CreditUnionLocal.svelte";
 
-    const columns = [
-        {
-            key: "regionName",
-            title: "광역",
-            value: v => v.regionName,
-            sortable: false
-        },
-    ]
+    let regionCode = 0
+    let regions = []
 
-    function handleClick(event) {
-        console.log(event.detail.row)
-        regionCode = event.detail.row.regionCode
-	}
-
-    let pGetRegions = getRegions();
-    async function getRegions() {
-        const response = await fetch(`/api/finance/credit_union/regions`);
-        const regions = await response.text();
-
-        if (response.ok) {
-            return JSON.parse(regions);
-        } else {
-            throw new Error(regions);
-        }
-    }
-
-    $: regionCode = "sido01"
-    let baseAt = "2022-04-11" // TODO now() - 1
+    let getRegions = (async () => {
+        let temp = [
+            {id:0, regionName:"test"},
+            {id:1, regionName:"temp"}
+        ];
+        regions = temp
+        regionCode = temp[0].id;
+    })();
 </script>
 
 <div class="container-fluid">
-    {#await pGetRegions}
-        <p>...waiting</p>
-    {:then regions}
-        <SvelteTable columns="{columns}" rows="{regions}" on:clickRow="{handleClick}"></SvelteTable>
-    {:catch error}
-        <p style="color: red">{error.message}</p>
-    {/await}
-
-    <CreditUnionLocal regionCode={regionCode} baseAt={baseAt} />
+    <table>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+            </tr>
+            {#each regions as region,i}
+            <tr on:click={() => {regionCode = region.id}}>
+                <td>{region.id}</td>  
+                <td>{region.regionName}</td>  
+            </tr>    
+            {/each}
+        </tbody>
+    </table>
+    <CreditUnionLocal regionCode={regionCode} />
 </div>

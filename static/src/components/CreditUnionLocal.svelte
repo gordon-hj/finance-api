@@ -1,38 +1,40 @@
 <script>
-    import SvelteTable from "../../node_modules/svelte-table";
-	export let regionCode, baseAt
+	import { afterUpdate } from 'svelte';
 
-    const columns = [
-        {
-            key: "localName",
-            title: "지역",
-            value: v => v.localCode,
-            sortable: false
-        },
+    export let regionCode
+    let locals = []
+	
+	afterUpdate(() => { getLocals() })
+
+    let testLocalData = [
+        [
+            {id:0, localName:"local_test"},
+            {id:1, localName:"local_temp"}
+        ],
+        [
+            {id:2, localName:"local_test1"},
+            {id:3, localName:"local_temp1"}
+        ]
     ]
 
-    let pGetLocals = getLocals();
-    async function getLocals() {
-        const url = `/api/finance/credit_union/locals?region_code=` + regionCode + `&base_at=` + baseAt
-        const response = await fetch(`/api/finance/credit_union/locals?region_code=` + regionCode + `&base_at=` + baseAt);
-        const locals = await response.text();
-
-        console.log(locals)
-
-        if (response.ok) {
-            return JSON.parse(locals);
-        } else {
-            throw new Error(response);
-        }
-    }
+    let getLocals = () => {
+        locals = testLocalData[regionCode];
+    };
 </script>
 
 <div class="container-fluid">
-    {#await pGetLocals}
-        <p>...waiting</p>
-    {:then locals}
-        <SvelteTable columns="{columns}" rows="{locals}"></SvelteTable>
-    {:catch error}
-        <p style="color: red">{error.message}</p>
-    {/await}
+    <table>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+            </tr>
+            {#each locals as local,i}
+            <tr>
+                <td>{local.id}</td>  
+                <td>{local.localName}</td>  
+            </tr>    
+            {/each}
+        </tbody>
+    </table>
 </div>
