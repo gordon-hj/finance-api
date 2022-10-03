@@ -1,4 +1,6 @@
 <script>
+    import Table from './Table.svelte' 
+
     let regions = []
     let selectedRegionId
 
@@ -38,4 +40,5 @@
             <option value={local.id}>{local.localName}</option>
         {/each}
     </select>
+    <Table />
 </div>
