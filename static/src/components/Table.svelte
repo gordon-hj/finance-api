@@ -1,10 +1,14 @@
 <script>
+    export let title, fields, values
+
+    let selectedIndex = 0
     let open = false
-    let toggleDetail = (e) => {
-        console.log(e)
-        console.log(open)
-        e.preventDefault()
-        open = !open
+
+    let toggleDetail = (e, i) => {
+      if(i != null && i != undefined)
+        selectedIndex = i
+      e.preventDefault()
+      open = !open
     }
 </script>
 
@@ -14,102 +18,37 @@
 
 <div class='plate' class:open>
   <div class='body' class:open>
-  <h1>
-    Providers
-  </h1>
-  <p>
-    (An example table + detail view scenario)
-  </p>
+  <p>{title}</p>
   <main>
     <table>
       <thead>
         <tr>
-          <th>
-            Provider Name
-          </th>
-          <th>
-            E-mail
-          </th>
-          <th></th>
+          {#each fields as field,i}
+          <th>{field}</th>
+          {/each}
+          <th>상세</th>
         </tr>
       </thead>
-      <tfoot>
-        <tr>
-          <th colspan='3'>
-            Year: 2014
-          </th>
-        </tr>
-      </tfoot>
       <tbody>
+        {#each values as value,i}
         <tr>
-          <td data-title='Provider Name'>
-            Iacob Geaorgescu
-          </td>
-          <td data-title='E-mail'>
-            e-mail@test-email.com
-          </td>
+          {#each value as field}
+          <td>{field}</td>
+          {/each}
           <td class='select'>
-            <button class='button' on:click={toggleDetail}>
-              Select
-            </button>
+            <button class='button' on:click={(e) => toggleDetail(e, i)}>Select</button>
           </td>
         </tr>
-        <tr>
-          <td data-title='Provider Name'>
-            Julius Neumann
-          </td>
-          <td data-title='E-mail'>
-            e-mail@test-email.com
-          </td>
-          <td class='select'>
-            <button class='button' on:click={toggleDetail}>
-              Select
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td data-title='Provider Name'>
-            Christoph Koller
-          </td>
-          <td data-title='E-mail'>
-            e-mail@test-email.com
-          </td>
-          <td class='select'>
-            <button class='button' on:click={toggleDetail}>
-              Select
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td data-title='Provider Name'>
-            Bram Lemmens
-          </td>
-          <td data-title='E-mail'>
-            e-mail@test-email.com
-          </td>
-          <td class='select'>
-            <button class='button' on:click={toggleDetail}>
-              Select
-            </button>
-          </td>
-        </tr>
+        {/each}
       </tbody>
     </table>
     <div class='detail' class:open>
       <div class='detail-container'>
         <dl>
-          <dt>
-            Provider Name
-          </dt>
-          <dd>
-            John Doe
-          </dd>
-          <dt>  
-            E-mail
-          </dt>
-          <dd>
-            email@example.com
-          </dd>
+          {#each fields as field,i}
+          <dt>{field}</dt>
+          <dd>{values[selectedIndex][i]}</dd>
+          {/each}
         </dl>
       </div>
       <div class='detail-nav'>
@@ -139,10 +78,11 @@
 
   .body {
     padding: 20px;
-    background-color: #5BB9B8;
+    /* background-color: #5BB9B8; */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    color: #fff;
+    /* color: #fff; */
+    color: black;
     font-size: 1.6rem;
     font-family: 'Lato', sans-serif;
   }
@@ -154,6 +94,7 @@
 
   main {
     background-color: #2C3845;
+    color: #fff;
   }
 
   h1 {
