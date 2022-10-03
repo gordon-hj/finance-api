@@ -12,10 +12,6 @@
     }
 </script>
 
-<svelte:head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-</svelte:head>
-
 <div class='plate' class:open>
   <div class='body' class:open>
   <p>{title}</p>
@@ -36,7 +32,7 @@
           <td>{field}</td>
           {/each}
           <td class='select'>
-            <button class='button' on:click={(e) => toggleDetail(e, i)}>Select</button>
+            <button class='button' on:click={(e) => toggleDetail(e, i)}>상세</button>
           </td>
         </tr>
         {/each}
@@ -173,7 +169,8 @@
   }
 
   .detail {
-    background-color: #BD2A4E;
+    /* background-color: #BD2A4E; */
+    background-color: #4b908f;
     width: 100%;
     height: 100%;
     padding: 40px 0;
@@ -210,15 +207,15 @@
 
   dt {
     font-size: 2.2rem;
-    font-weight: 300;
+    font-weight: bold;
   }
 
   dd {
     margin: 0 0 40px 0;
     font-size: 1.8rem;
     padding-bottom: 5px;
-    border-bottom: 1px solid #ac2647;
-    box-shadow: 0 1px 0 #c52c51;
+    /* border-bottom: 1px solid #ac2647; */
+    /* box-shadow: 0 1px 0 #c52c51; */
   }
 
   .close {
