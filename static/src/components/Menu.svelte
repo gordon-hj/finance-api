@@ -1,5 +1,5 @@
 <script>
-	let menu = ['우리동네 예적금 금리'];
+	let menu = ['예적금'];
 </script>
 
 <div class="list-group list-group-flush">
